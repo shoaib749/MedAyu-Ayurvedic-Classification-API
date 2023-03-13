@@ -19,7 +19,7 @@ model = load_model('model-1.h5')
 
 @app.route('/')
 def index():
-    return "Mini project MedAyu"
+    return "Mini project MedAyu. Use /class with POST method to access  this API with params:test_url "
 
 
 @app.route('/class', methods=['POST'])
