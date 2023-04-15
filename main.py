@@ -11,7 +11,7 @@ from skimage import io
 
 app = Flask(__name__)
 
-model = load_model('model-1.h5')
+model = load_model('model.h5')
 
 
 # model = ResNet50(weigths='imagenet')
@@ -24,42 +24,15 @@ def index():
 
 @app.route('/class', methods=['POST'])
 def classify():
-    label_map = {0: 'Adhatoda Vasica',
-                 1: 'Annona retisulate',
-                 2: 'Barleria Prionitis Linn',
-                 3: 'Bauchanania Latifolia roxd',
-                 4: 'Bauhinia veriegata',
-                 5: 'Bixa Orellana Linn',
-                 6: 'Bryopllum pinnatum lam kurz',
-                 7: 'Cassia Fistula',
-                 8: 'Celastrus Paniculatus Wild',
-                 9: 'Citrus Acida Pers',
-                 10: 'Clerodendrum Infortunatum',
-                 11: 'Commiphora Mukul',
-                 12: 'Eaginia Jambolana',
-                 13: 'Emblica officinalis',
-                 14: 'Erythina variegata',
-                 15: 'Ficus hispida linn',
-                 16: 'Gardenia Gummifera LF',
-                 17: 'Gommiphora mukul',
-                 18: 'Ichnocarpus fruitescens',
-                 19: 'Manikara hexandra',
-                 20: 'Morinda Citrifolia Linn',
-                 21: 'Paederia foetida Linn',
-                 22: 'Premna IntigriFolia Linn',
-                 23: 'Rasa Centifolia Linn',
-                 24: 'S. Cheleonidis',
-                 25: 'Salmaila Malabarica',
-                 26: 'Sapindus Trifoliatus Linn',
-                 27: 'Saraca Asoka',
-                 28: 'Tamarindus indica',
-                 29: 'Terminalia Bellirica Roxb',
-                 30: 'Terminalia chebula retz',
-                 31: 'Vitex Negundo',
-                 32: 'Weddallia calendulaceae',
-                 33: 'Withania Somnifera Linn',
-                 34: 'Woodfordia Fructicose'}
+   
 
+
+    with open("plants_name_114.txt","r") as file:
+        lines = file.readlines()
+    label_map ={}
+    for i in range(len(lines)):
+        label_map[i] = lines[i].strip()
+    print(label_map)
     image_url = request.form.get('test_url')
     image_array = io.imread(image_url)
     # testing for preprocessing
