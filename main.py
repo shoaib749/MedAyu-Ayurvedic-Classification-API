@@ -12,7 +12,7 @@ from skimage import io
 app = Flask(__name__)
 
 model = load_model('model.h5')
-
+#this for pushing
 
 # model = ResNet50(weigths='imagenet')
 # model.save('')
